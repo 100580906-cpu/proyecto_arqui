@@ -37,10 +37,9 @@ int guardar_procesos(char *nombre, item_t *items, int count){ //guardar procesos
       fclose(file);
       return ERROR_WRITE;
     };
-
-    fclose(file);
-    return SUCCESS;
   };
+  fclose(file);
+  return SUCCESS;
 };
 
 int cargar_procesos(char *nombre, item_file_t *items, int maximo, int *outcount){ //cargar procesos dado un archivo
