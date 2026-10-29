@@ -20,7 +20,7 @@ typedef struct {
     process_state_t state;  /* Estado */
 } item_file_t;
 
-int check_access(const char *filename, const char *mode);
+int checkAccesso(const char *filename, const char *mode);
 
 int guardar_procesos(const char *filename, const item_t *items, int count);
 
