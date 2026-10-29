@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "file_manager.h"
+#include "ficheros.h"
 
 int checkAcceso(char *nombre, char *modo){ //funcion para chequear si tenemos acceso al archivo
-  FILE file = fopen(nombre, modo);
+  FILE *file = fopen(nombre, modo);
   if(file==NULL){
     return NO_EXISTE;
   };
-  fclose(nombre);
+  fclose(file);
   return EXISTE;
 };
 
 int guardar_procesos(char *nombre, item_t *items, int count){ //guardar procesos en el archivo
   errno=0;
-  FILE file = fopen(nombre, "wb");
+  FILE *file = fopen(nombre, "wb");
   if(file==NULL){ //si no podemos abrirlo por lo que sea, lo cerramos y avisamos
     return ERROR_AL_ABRIR;
   };
@@ -33,8 +33,8 @@ int guardar_procesos(char *nombre, item_t *items, int count){ //guardar procesos
     record.c = items[i].c;
     record.state = items[i].state;
 
-    if (fwrite(&record, sizeof(item_file_t), 1, f) != 1) {
-      fclose(f);
+    if (fwrite(&record, sizeof(item_file_t), 1, file) != 1) {
+      fclose(file);
       return ERROR_WRITE;
     };
 
@@ -43,7 +43,7 @@ int guardar_procesos(char *nombre, item_t *items, int count){ //guardar procesos
   };
 };
 
-int cargar_procesos(char *nombre, item_file_t *items, int maximo, int outcount){ //cargar procesos dado un archivo
+int cargar_procesos(char *nombre, item_file_t *items, int maximo, int *outcount){ //cargar procesos dado un archivo
   errno = 0;
     FILE *file = fopen(nombre, "rb"); //esto es igual que la funcion anterior
     if (file == NULL) {
