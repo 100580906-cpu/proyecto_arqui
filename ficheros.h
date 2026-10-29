@@ -20,10 +20,10 @@ typedef struct {
     process_state_t state;  /* Estado */
 } item_file_t;
 
-int checkAcceso(const char *filename, const char *mode);
+int checkAcceso(char *filename, char *mode);
 
-int guardar_procesos(const char *filename, const item_t *items, int count);
+int guardar_procesos(char *filename, item_t *items, int count);
 
-int cargar_procesos(const char *filename, item_file_t *out_items, int max_capacity, int *out_count);
+int cargar_procesos(char *filename, item_file_t *out_items, int max_capacity, int *out_count);
 
 #endif
