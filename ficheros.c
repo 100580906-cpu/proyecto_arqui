@@ -4,7 +4,7 @@
 #include <errno.h>
 #include "ficheros.h"
 
-int checkAcceso(char *nombre, char *modo){ //funcion para chequear si tenemos acceso al archivo
+int checkAcceso(const char *nombre, const char *modo){ //funcion para chequear si tenemos acceso al archivo
   FILE *file = fopen(nombre, modo);
   if(file==NULL){
     return NO_EXISTE;
@@ -13,7 +13,7 @@ int checkAcceso(char *nombre, char *modo){ //funcion para chequear si tenemos ac
   return EXISTE;
 };
 
-int guardar_procesos(char *nombre, item_t *items, int count){ //guardar procesos en el archivo
+int guardar_procesos(const char *nombre, const item_t *items, int count){ //guardar procesos en el archivo
   errno=0;
   FILE *file = fopen(nombre, "wb");
   if(file==NULL){ //si no podemos abrirlo por lo que sea, lo cerramos y avisamos
@@ -42,7 +42,7 @@ int guardar_procesos(char *nombre, item_t *items, int count){ //guardar procesos
   return SUCCESS;
 };
 
-int cargar_procesos(char *nombre, item_file_t *items, int maximo, int *outcount){ //cargar procesos dado un archivo
+int cargar_procesos(const char *nombre, item_file_t *items, int maximo, int *outcount){ //cargar procesos dado un archivo
   errno = 0;
     FILE *file = fopen(nombre, "rb"); //esto es igual que la funcion anterior
     if (file == NULL) {
